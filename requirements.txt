@@ -1,0 +1,20 @@
+numpy
+pandas
+matplotlib
+pyspark >= 3.4.0
+imageio
+scikit-learn
+torch
+torchvision
+transformers
+seaborn
+
+# developer tools
+jupyterlab
+black
+pre-commit
+openai
+langchain
+weaviate-client
+redlines
+panel

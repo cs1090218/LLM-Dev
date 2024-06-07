@@ -18,3 +18,4 @@ langchain
 weaviate-client
 redlines
 panel
+python-dotenv

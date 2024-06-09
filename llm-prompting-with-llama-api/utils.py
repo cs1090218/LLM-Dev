@@ -2,10 +2,9 @@ import os
 import time
 from dotenv import load_dotenv, find_dotenv
 from together import Together
-import warnings
+import openai
 
 import requests
-import json
 
 # Initailize global variables
 _ = load_dotenv(find_dotenv())
@@ -17,7 +16,13 @@ headers = {
 }
 
 
-def llama_from_messages(messages, model="meta-llama/Llama-3-8b-chat-hf", temperature=0.0):
+# Queries the Together API
+def llama_from_messages(messages, model="meta-llama/Llama-3-8b-chat-hf", temperature=0.0, verbose=False):
+    if verbose:
+        print ("TogetherAI api call")
+        print ("Using model:", model)
+        print ("messages:", messages)
+
     client = Together(api_key=os.getenv('TOGETHER_API_KEY'))
     response = client.chat.completions.create(
         model=model,
@@ -27,12 +32,34 @@ def llama_from_messages(messages, model="meta-llama/Llama-3-8b-chat-hf", tempera
     return response.choices[0].message.content
 
 
-def llama(prompt, model="meta-llama/Llama-3-8b-chat-hf", temperature=0.0):
+# Queries the local Llama
+def llama_from_messages_local(messages, model="llama3:instruct", temperature=0.0, verbose=False):
+    if verbose:
+        print ("Local Llama call")
+        print ("Using model:", model)
+        print ("messages:", messages)
+
+    client = openai.OpenAI(
+        base_url = 'http://localhost:11434/v1',
+        api_key='ollama', # required, but unused
+    )
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=temperature
+    )
+    return response.choices[0].message.content
+
+
+def llama(prompt, use_local_llama=True, model="meta-llama/Llama-3-8b-chat-hf", temperature=0.0, verbose=False):
     messages = [{"role": "user", "content": prompt}]
-    return llama_from_messages(messages, model, temperature)
+    if use_local_llama:
+        return llama_from_messages_local(messages, temperature=temperature, verbose=verbose)
+    else:
+        return llama_from_messages(messages, model, temperature, verbose=verbose)
 
 
-def llama_chat(system_message, prompts, responses, model="meta-llama/Llama-3-8b-chat-hf", temperature=0.0):
+def llama_chat(system_message, prompts, responses, use_local_llama=True, model="meta-llama/Llama-3-8b-chat-hf", temperature=0.0, verbose=False):
     messages = []
     if system_message:
         messages.append({"role": "system", "content": system_message})
@@ -41,7 +68,10 @@ def llama_chat(system_message, prompts, responses, model="meta-llama/Llama-3-8b-
         messages.append({"role": "assistant", "content": responses[i]})
     messages.append({"role": "user", "content": prompts[-1]})
     
-    return llama_from_messages(messages, model, temperature)
+    if use_local_llama:
+        return llama_from_messages_local(messages, temperature=temperature, verbose=verbose)
+    else:
+        return llama_from_messages(messages, model, temperature, verbose=verbose)
 
 
 # ============================ Below are prompt construction when using REST API endpoint =======================================

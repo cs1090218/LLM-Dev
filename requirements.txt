@@ -19,3 +19,5 @@ weaviate-client
 redlines
 panel
 python-dotenv
+together
+ipywidgets

@@ -1,4 +1,4 @@
-# learning-llm
+# Learning LLM Applications
 
 Best to use llm-prompting-with-llama-api for all tasks esp when trying to incorporate it in places. Only use of llm-prompting-with-openai-api is for some sample usages of prompting best practices.
 

@@ -1,6 +1,7 @@
-# Learning LLM Applications
+# LLM Applications
 
-Best to use llm-prompting-with-llama-api for all tasks esp when trying to incorporate it in places. Only use of llm-prompting-with-openai-api is for some sample usages of prompting best practices.
+### RAG
+- Retrieval Augmented Generation based Personal Assisstant
 
 ### llm-prompting-with-llama-api
 - Samples on how to prompt Llama models using either TogetherAI or the local llama (via ollama)
@@ -10,5 +11,4 @@ Best to use llm-prompting-with-llama-api for all tasks esp when trying to incorp
 - This uses local llama only (via ollama)
 - Some examples of using prompts to accomplish tasks like summarizing, expanding, transforming, etc.
 
-### rag
-- Retrieval Augmented generation code
+Best to use llm-prompting-with-llama-api for all tasks esp when trying to incorporate it in places. Only use of llm-prompting-with-openai-api is for some sample usages of prompting best practices.

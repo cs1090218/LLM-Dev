@@ -33,3 +33,4 @@ llama-index-vector-stores-qdrant
 docx2txt
 llama-index-readers-file
 flask
+pdfplumber

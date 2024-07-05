@@ -9,6 +9,12 @@
     - Creates query engine tools for each of the docs using the embeddings and file summaries
     - Uses thes objects to create a router query engine that can route the query to one or more of these query engines
 
+### Data Extraction
+- Automated extraction of monthly statements
+    - Parses the statement pdf file
+    - Adds to my spreadsheet
+    - Uses ML to classify the transaction as Regular, Trip or Hobby
+
 ### llm-prompting-with-llama-api
 - Samples on how to prompt Llama models using either TogetherAI or the local llama (via ollama)
 - A few sample usages of prompting like summarizing, inferring, chatting, etc.

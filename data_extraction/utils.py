@@ -72,7 +72,7 @@ def write_content(spreadsheet_id, range_name, values):
         )
         .execute()
     )
-    print(f"{result.get('updatedCells')} cells updated.")
+    print(f"Exported content to {result.get('updatedCells')} cells.")
     return result
   except HttpError as error:
     print(f"An error occurred: {error}")

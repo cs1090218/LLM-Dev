@@ -79,6 +79,31 @@ def write_content(spreadsheet_id, range_name, values):
     return error
 
 
+def read_sheet(spreadsheet_id, sheet_name):
+  """Read a sheet"""
+  creds = get_creds()
+  try:
+    service = build("sheets", "v4", credentials=creds)
+
+    # Call the Sheets API
+    sheet = service.spreadsheets()
+    result = (
+        sheet.values()
+        .get(spreadsheetId=spreadsheet_id, range=sheet_name)
+        .execute()
+    )
+    values = result.get("values", [])
+
+    if not values:
+      print("No data found.")
+      return None
+
+    return values
+  except HttpError as error:
+    print(f"An error occurred: {error}")
+    return error
+
+
 def format_sheet(spreadsheet_id, sheet_id):
   """Does following operations:
     1- Freeze top row

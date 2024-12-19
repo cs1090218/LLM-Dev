@@ -1,6 +1,7 @@
 numpy
 pandas
 matplotlib
+opencv-python
 pyspark >= 3.4.0
 imageio
 scikit-learn
@@ -34,3 +35,7 @@ docx2txt
 llama-index-readers-file
 flask
 pdfplumber
+accelerate
+peft
+bitsandbytes
+trl

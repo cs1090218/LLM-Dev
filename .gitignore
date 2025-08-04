@@ -10,3 +10,6 @@ data/*
 # My Google Drive credentials file
 google_credentials.json
 google_token.json
+
+# Data files
+*.gif
